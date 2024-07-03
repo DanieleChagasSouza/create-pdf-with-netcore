@@ -10,7 +10,7 @@ namespace PDF_Generator.Controllers
     [ApiController]
     public class PdfCreatorController : ControllerBase
     {
-        private IConverter _converter;
+        private readonly IConverter _converter;
 
         public PdfCreatorController(IConverter converter)
         {
@@ -20,6 +20,9 @@ namespace PDF_Generator.Controllers
         [HttpGet]
         public IActionResult CreatePDF()
         {
+            // Define o caminho completo do arquivo PDF no diretório desejado
+            var outputPath = @"C:\Users\DanieleChagasSouza\Desktop\create-pdf-with-netcore\Employee_Report.pdf";
+
             var globalSettings = new GlobalSettings
             {
                 ColorMode = ColorMode.Color,
@@ -27,14 +30,13 @@ namespace PDF_Generator.Controllers
                 PaperSize = PaperKind.A4,
                 Margins = new MarginSettings { Top = 10 },
                 DocumentTitle = "PDF Report",
-                //Out = @"D:\PDFCreator\Employee_Report.pdf"  USE THIS PROPERTY TO SAVE PDF TO A PROVIDED LOCATION
+                Out = outputPath  // Salva o PDF no diretório especificado
             };
 
             var objectSettings = new ObjectSettings
             {
                 PagesCount = true,
-                //HtmlContent = TemplateGenerator.GetHTMLString(),
-                Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                HtmlContent = TemplateGenerator.GetHTMLString(),
                 WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
                 HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
                 FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
@@ -46,13 +48,9 @@ namespace PDF_Generator.Controllers
                 Objects = { objectSettings }
             };
 
-            //_converter.Convert(pdf); IF WE USE Out PROPERTY IN THE GlobalSettings CLASS, THIS IS ENOUGH FOR CONVERSION
+            _converter.Convert(pdf);
 
-            var file = _converter.Convert(pdf);
-
-            //return Ok("Successfully created PDF document.");
-            //return File(file, "application/pdf", "EmployeeReport.pdf");
-            return File(file, "application/pdf");
+            return Ok("Successfully created PDF document.");
         }
     }
 }

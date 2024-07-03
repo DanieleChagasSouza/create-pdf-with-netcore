@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\PDF_Generator",
+    "\\PDF_Generator\\PDF_Generator",
+    "\\PDF_Generator\\PDF_Generator\\Utility"
+  ],
+  "SelectedNode": "\\PDF_Generator\\PDF_Generator\\Utility\\CustomAssemblyLoadContext.cs",
+  "PreviewInSolutionExplorer": false
+}
