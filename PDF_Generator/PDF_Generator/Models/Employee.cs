@@ -2,9 +2,11 @@
 {
     public class Employee 
     { 
-        public string Name { get; set; } 
-        public string LastName { get; set; } 
-        public int Age { get; set; } 
-        public string Gender { get; set; } 
+        public string Data { get; set; } 
+        public string Descricao { get; set; } 
+        public string Categoria { get; set; } 
+        public double Valor { get; set; }
+
+        public string Moeda { get; set; }
     }
 }

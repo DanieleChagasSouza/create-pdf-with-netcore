@@ -12,15 +12,37 @@ namespace PDF_Generator.Utility
             sb.Append(@"
                         <html>
                             <head>
+                                <style>
+                                    .header {
+                                        text-align: center;
+                                        color: green;
+                                        padding-bottom: 35px;
+                                    }
+                                    table {
+                                        width: 80%;
+                                        border-collapse: collapse;
+                                    }
+                                    td, th {
+                                        border: 1px solid gray;
+                                        padding: 30px;
+                                        font-size: 22px;
+                                        text-align: center;
+                                    }
+                                    table th {
+                                        background-color: green;
+                                        color: white;
+                                    }
+                                </style>
                             </head>
                             <body>
-                                <div class='header'><h1>This is the generated PDF report!!!</h1></div>
+                                <div class='header'><h1>Nome da Empresa: New Show Tech Brazil  =>  Período Financeiro: Janeiro 2024</h1></div>
                                 <table align='center'>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>LastName</th>
-                                        <th>Age</th>
-                                        <th>Gender</th>
+                                        <th>Data</th>
+                                        <th>Descrição</th>
+                                        <th>Categoria</th>
+                                        <th>Valor</th>
+                                        <th>Moeda</th>
                                     </tr>");
 
             foreach (var emp in employees)
@@ -30,7 +52,8 @@ namespace PDF_Generator.Utility
                                     <td>{1}</td>
                                     <td>{2}</td>
                                     <td>{3}</td>
-                                  </tr>", emp.Name, emp.LastName, emp.Age, emp.Gender);
+                                    <td>{4}</td>
+                                  </tr>", emp.Data, emp.Descricao, emp.Categoria, emp.Valor, emp.Moeda);
             }
 
             sb.Append(@"
